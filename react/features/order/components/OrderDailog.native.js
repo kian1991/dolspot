@@ -44,7 +44,7 @@ class OrderDialog extends Component<Props> {
         super(props);
 
         this.state = {
-            loading: true
+            loading: false
         }
 
         // Bind event handler so it is only bound once for every instance.
