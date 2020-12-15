@@ -166,6 +166,7 @@
             "liveStreaming": "Live Stream"
         },
         "add": "Add",
+        "addEmailNotification": "Please enter your email in the setting!",
         "allow": "Allow",
         "alreadySharedVideoMsg": "Another participant is already sharing a video. This conference allows only one shared video at a time.",
         "alreadySharedVideoTitle": "Only one shared video is allowed at a time",

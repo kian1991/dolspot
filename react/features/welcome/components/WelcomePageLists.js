@@ -134,7 +134,7 @@ function _mapStateToProps(state: Object) {
     if (typeof defaultPage === 'undefined') {
         const recentList = state['features/recent-list'];
 
-        defaultPage = recentList && recentList.length ? 0 : 1;
+        defaultPage = recentList && recentList.length ? 0 : 2;
     }
 
     return {
