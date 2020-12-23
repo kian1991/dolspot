@@ -114,7 +114,8 @@ class OrderDialog extends Component<Props> {
         }
 
         const x = new Date(), _date = `${x.getDate()}.${x.getMonth() + 1}.${x.getFullYear()}`,
-            _time = `${x.getHours()}:${x.getMinutes()}:${x.getSeconds()}`;
+            _time = `${x.getHours()}:${x.getMinutes()}:${x.getSeconds()}`,
+            _reference = `${_language} - ${_date} ${_time}`;
         // Submit the post request to get the meeting name.
         const data = JSON.stringify({
             "email": _localParticipant.email,
@@ -123,12 +124,12 @@ class OrderDialog extends Component<Props> {
             "address":"Online",
             "date": _date,
             "time": _time,
-            "reference":"Nest",
+            "reference":_reference,
             "notes":"videoanruf",
             "customer":"/",
             "phone":""
         });
-        console.log('body =>', data);
+        // console.log('body =>', data);
         $.ajax({
             // For development
             // url: 'https://script.google.com/macros/s/AKfycbzU_4_ctXyPf7U-6S3Aq165DR4bDqoOUHxoNUVdykJbUwUSr-c/exec',
@@ -137,7 +138,7 @@ class OrderDialog extends Component<Props> {
             type: 'POST',
             data: data,
             success(res) {
-                console.log('result =>', res);
+                // console.log('result =>', res);
                 const _res = JSON.parse(res);
                 if (_res.status == '200') {
                     // room name to join for interpreter.
@@ -149,7 +150,7 @@ class OrderDialog extends Component<Props> {
                 _t.props.dispatch(hideDialog());
             },
             error(error) {
-                console.log('error =>', error);
+                // console.log('error =>', error);
                 _t.setState({
                     loading: false
                 });
