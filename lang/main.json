@@ -500,7 +500,10 @@
     },
     "order": {
         "filterlanguages": "Filtered languages",
-        "alllanguages": "All languages"
+        "alllanguages": "All languages",
+        "pleasewait": "Please wait",
+        "pleasewaitTitle": "Looking for an interpreter ...",
+        "pleasewaitDescription": "As soon as we find one, meet them in the video conference room."
     },
     "passwordSetRemotely": "set by another participant",
     "passwordDigitsOnly": "Up to {{number}} digits",

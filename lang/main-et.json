@@ -262,6 +262,7 @@
         "shareYourScreenDisabled": "Ekraani jagamine on keelatud.",
         "shareYourScreenDisabledForGuest": "Külalised ei saa ekraani jagada.",
         "startLiveStreaming": "Alusta otseülekannet",
+        "startOrderConfirmation": "Wollen Sie einen {{language}}-Dolmetscher bestellen?",
         "startRecording": "Alusta salvestamist",
         "startRemoteControlErrorMessage": "Kaugjuhtimise sessiooni alustamisel tekkis viga!",
         "stopLiveStreaming": "Lõpeta otseülekanne",
@@ -458,6 +459,13 @@
         "newDeviceCameraTitle": "Leitud uus kaamera",
         "newDeviceAudioTitle": "Leitud uus heliseadeldis",
         "newDeviceAction": "Kasuta"
+    },
+    "order": {
+        "filterlanguages": "Gefilterte sprachen",
+        "alllanguages": "Alle Sprachen",
+        "pleasewait": "Bitte warten",
+        "pleasewaitTitle": "Ein Dolmetscher wird gesucht...",
+        "pleasewaitDescription": "Sobald wir einen gefunden haben, treffen Sie ihn im Videokonferenzraum."
     },
     "passwordSetRemotely": "määratud teise kasutaja poolt",
     "passwordDigitsOnly": "Kuni {{number}} tähemärki",
@@ -748,6 +756,7 @@
             "video": "Video"
         },
         "calendar": "Kalender",
+        "order": "Bestellen",
         "connectCalendarButton": "Ühenda kalender",
         "connectCalendarText": "Ühenda oma kalender, et kõiki kohtumisi näha rakenduses {{app}}. Lisa {{provider}} kohtumised kalendrisse ja alusta kõnesid ühe klikiga.",
         "enterRoomTitle": "Alusta uut kõnet",
@@ -756,6 +765,7 @@
         "goSmall": "Mine",
         "join": "Ühine",
         "info": "Info",
+        "language": "Sprache",
         "privacy": "Privaatsus",
         "recentList": "Hiljutised",
         "recentListDelete": "Kustuta",
@@ -763,6 +773,7 @@
         "reducedUIText": "Tere tulemast rakendusse {{app}}!",
         "roomname": "Sisesta ruumi nimi",
         "roomnameHint": "Sisesta ruumi nimi või link, millega soovid ühinega. Võid nime välja mõelda, aga anna osalejatele sellest teada, et nad saaksid ruumiga ühineda.",
+        "searchlanguage": "Sprache suchen",
         "sendFeedback": "Saada tagasiside",
         "terms": "Tingimused",
         "title": "Turvaline, võimalusi täis ja tasuta keskkond videokõnede jaoks."

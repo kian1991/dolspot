@@ -263,6 +263,7 @@
         "shareYourScreenDisabled": "Skærmdeling er ikke slået til.",
         "shareYourScreenDisabledForGuest": "Gæster kan ikke dele deres skærm.",
         "startLiveStreaming": "Start live stream",
+        "startOrderConfirmation": "Wollen Sie einen {{language}}-Dolmetscher bestellen?",
         "startRecording": "Start optagelse",
         "startRemoteControlErrorMessage": "Der er sket en fejl under opstart af fjern kontrol sessionen!",
         "stopLiveStreaming": "Stop live stream",
@@ -459,6 +460,13 @@
         "newDeviceCameraTitle": "Nyt kamerat fundet",
         "newDeviceAudioTitle": "Ny lyd enhed fundet",
         "newDeviceAction": "Benyt"
+    },
+    "order": {
+        "filterlanguages": "Gefilterte sprachen",
+        "alllanguages": "Alle Sprachen",
+        "pleasewait": "Bitte warten",
+        "pleasewaitTitle": "Ein Dolmetscher wird gesucht...",
+        "pleasewaitDescription": "Sobald wir einen gefunden haben, treffen Sie ihn im Videokonferenzraum."
     },
     "passwordSetRemotely": "sat af et andet medlem",
     "passwordDigitsOnly": "Op til {{number}} tal",
@@ -749,12 +757,14 @@
             "video": "Video"
         },
         "calendar": "Kalender",
+        "order": "Bestellen",
         "connectCalendarButton": "Forbind til din kalender",
         "connectCalendarText": "",
         "enterRoomTitle": "Start et nyt møde",
         "go": "Start",
         "join": "Deltag",
         "info": "Info",
+        "language": "Sprache",
         "privacy": "Privatliv",
         "recentList": "Seneste",
         "recentListDelete": "Slet",
@@ -762,6 +772,7 @@
         "reducedUIText": "",
         "roomname": "Indtast mødenavn",
         "roomnameHint": "Indtast mødenavnet, du vil deltage i.",
+        "searchlanguage": "Sprache suchen",
         "sendFeedback": "Giv tilbagemelding",
         "betingelser": "Betingelser",
         "title": "Skærmbesøg & videomøder"

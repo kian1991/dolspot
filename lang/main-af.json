@@ -237,6 +237,7 @@
         "shareYourScreenDisabled": "Skermdeling gedeaktiveer.",
         "shareYourScreenDisabledForGuest": "Gaste kan nie skerms deel nie.",
         "startLiveStreaming": "Begin regstreekse stroom",
+        "startOrderConfirmation": "Wollen Sie einen {{language}}-Dolmetscher bestellen?",
         "startRecording": "Begin opname",
         "startRemoteControlErrorMessage": "",
         "stopLiveStreaming": "Stop regstreekse stroom",
@@ -427,6 +428,13 @@
         "newDeviceCameraTitle": "",
         "newDeviceAudioTitle": "",
         "newDeviceAction": ""
+    },
+    "order": {
+        "filterlanguages": "Gefilterte sprachen",
+        "alllanguages": "Alle Sprachen",
+        "pleasewait": "Bitte warten",
+        "pleasewaitTitle": "Ein Dolmetscher wird gesucht...",
+        "pleasewaitDescription": "Sobald wir einen gefunden haben, treffen Sie ihn im Videokonferenzraum."
     },
     "passwordSetRemotely": "",
     "passwordDigitsOnly": "",
@@ -689,11 +697,13 @@
             "video": "Video"
         },
         "calendar": "Kalender",
+        "order": "Bestellen",
         "connectCalendarButton": "Koppel u kalender",
         "connectCalendarText": "",
         "enterRoomTitle": "Begin ’n nuwe vergadering",
         "go": "GAAN",
         "join": "SLUIT AAN",
+        "language": "Sprache",
         "info": "",
         "privacy": "Privaatheid",
         "recentList": "Onlangs",
@@ -702,6 +712,7 @@
         "reducedUIText": "",
         "roomname": "Gee kamernaam",
         "roomnameHint": "Gee die naam of URL van die kamer waar u wil aansluit. Dink gerus enige naam uit. Laat weet net die mense wat u ontmoet wat dit is sodat hulle die selfde naam gee.",
+        "searchlanguage": "Sprache suchen",
         "sendFeedback": "Stuur terugvoer",
         "terms": "Voorwaardes",
         "title": "Veilige en volledig gratis videokonferensies propvol funksionaliteit"

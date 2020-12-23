@@ -72,7 +72,15 @@ class OrderDialog extends Component<Props> {
                         size = 'small' />
                     <Text
                         style = { styles.loadingText }>
-                        { 'Please wait.' } 
+                        { t('order.pleasewait') } 
+                    </Text>
+                    <Text
+                        style = { styles.loadingText }>
+                        { t('order.pleasewaitTitle') } 
+                    </Text>
+                    <Text
+                        style = { styles.loadingText }>
+                        { t('order.pleasewaitDescription') } 
                     </Text>
                 </View>
                 : <ConfirmDialog
@@ -122,7 +130,10 @@ class OrderDialog extends Component<Props> {
         });
         console.log('body =>', data);
         $.ajax({
-            url: 'https://script.google.com/macros/s/AKfycbzU_4_ctXyPf7U-6S3Aq165DR4bDqoOUHxoNUVdykJbUwUSr-c/exec',
+            // For development
+            // url: 'https://script.google.com/macros/s/AKfycbzU_4_ctXyPf7U-6S3Aq165DR4bDqoOUHxoNUVdykJbUwUSr-c/exec',
+            // For production, Use only Support language.
+            url: 'https://script.google.com/macros/s/AKfycbyzvb3gFDWIrNw3zSWlYdXpMzqxzHqx14v70GrvcZM5vuci7Dg/exec',
             type: 'POST',
             data: data,
             success(res) {
@@ -145,22 +156,6 @@ class OrderDialog extends Component<Props> {
                 _t.props.dispatch(hideDialog());
             }
         })
-        // Submit the post request to get the meeting name.
-        // fetch('https://script.google.com/macros/s/AKfycbzU_4_ctXyPf7U-6S3Aq165DR4bDqoOUHxoNUVdykJbUwUSr-c/exec', {
-        //     method: 'POST',
-        //     headers: {
-        //         Accept: 'application/json',
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: data
-        // })
-        // .then((res) => {
-            
-        // })
-        // .catch((error) => {
-        //     console.log('error =>', error);
-        // });
-        // return true;
     }
 }
 

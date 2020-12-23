@@ -287,6 +287,7 @@
         "shareYourScreenDisabled": "Bildschirmfreigabe deaktiviert.",
         "shareYourScreenDisabledForGuest": "Gäste können den Bildschirm nicht freigeben.",
         "startLiveStreaming": "Livestream starten",
+        "startOrderConfirmation": "Wollen Sie einen {{language}}-Dolmetscher bestellen?",
         "startRecording": "Aufnahme starten",
         "startRemoteControlErrorMessage": "Beim Versuch, die Fernsteuerung zu starten, ist ein Fehler aufgetreten!",
         "stopLiveStreaming": "Livestream stoppen",
@@ -497,6 +498,13 @@
         "oldElectronClientDescription1": "Sie scheinen eine alte Version des Jitsi-Meet-Clients zu nutzen. Diese hat bekannte Schwachstellen. Bitte aktualisieren Sie auf unsere ",
         "oldElectronClientDescription2": "aktuelle Version",
         "oldElectronClientDescription3": "!"
+    },
+    "order": {
+        "filterlanguages": "Gefilterte sprachen",
+        "alllanguages": "Alle Sprachen",
+        "pleasewait": "Bitte warten",
+        "pleasewaitTitle": "Ein Dolmetscher wird gesucht...",
+        "pleasewaitDescription": "Sobald wir einen gefunden haben, treffen Sie ihn im Videokonferenzraum."
     },
     "passwordSetRemotely": "von einem anderen Teilnehmer gesetzt",
     "passwordDigitsOnly": "Bis zu {{number}} Ziffern",
@@ -848,6 +856,7 @@
             "video": "Video"
         },
         "calendar": "Kalender",
+        "order": "Bestellen",
         "connectCalendarButton": "Kalender verbinden",
         "connectCalendarText": "Verbinden Sie Ihren Kalender, um all Ihre Meetings in {{app}} anzuzeigen. Fügen Sie zudem {{provider}}-Meetings in Ihren Kalender ein und starten Sie sie mit nur einem Klick.",
         "enterRoomTitle": "Neues Meeting starten",
@@ -856,6 +865,7 @@
         "goSmall": "Los",
         "info": "Informationen",
         "join": "ERSTELLEN / BEITRETEN",
+        "language": "Sprache",
         "moderatedMessage": "Oder <a href=\"{{url}}\" rel=\"noopener noreferrer\" target=\"_blank\">reservieren Sie sich eine Konferenz-URL</a>, unter der Sie der einzige Moderator sind.",
         "privacy": "Datenschutz",
         "recentList": "Verlauf",
@@ -865,6 +875,7 @@
         "roomNameAllowedChars": "Der Konferenzname sollte keines der folgenden Zeichen enthalten: ?, &, :, ', \", %, #.",
         "roomname": "Konferenzname eingeben",
         "roomnameHint": "Name oder URL der Konferenz, der Sie beitreten möchten. Sie können einen Namen erfinden, er muss nur den anderen Teilnehmern übermittelt werden, damit diese der gleichen Konferenz beitreten.",
+        "searchlanguage": "Sprache suchen",
         "sendFeedback": "Feedback senden",
         "terms": "AGB",
         "title": "Sichere, voll funktionale und komplett kostenlose Videokonferenzen"
