@@ -1,21 +1,23 @@
 // @flow
 
-import type { Dispatch } from 'redux';
+import type { Dispatch } from "redux";
 
 import {
     createSelectParticipantFailedEvent,
-    sendAnalytics
-} from '../analytics';
-import { _handleParticipantError } from '../base/conference';
-import { MEDIA_TYPE } from '../base/media';
-import { getParticipants } from '../base/participants';
-import { reportError } from '../base/util';
-import { shouldDisplayTileView } from '../video-layout';
+    sendAnalytics,
+} from "../analytics";
+import { _handleParticipantError } from "../base/conference";
+import { MEDIA_TYPE } from "../base/media";
+import { getParticipants } from "../base/participants";
+import { reportError } from "../base/util";
+import { shouldDisplayTileView } from "../video-layout";
 
 import {
     SELECT_LARGE_VIDEO_PARTICIPANT,
-    UPDATE_KNOWN_LARGE_VIDEO_RESOLUTION
-} from './actionTypes';
+    UPDATE_KNOWN_LARGE_VIDEO_RESOLUTION,
+} from "./actionTypes";
+
+declare var APP: Object;
 
 /**
  * Signals conference to select a participant.
@@ -25,12 +27,12 @@ import {
 export function selectParticipant() {
     return (dispatch: Dispatch<any>, getState: Function) => {
         const state = getState();
-        const { conference } = state['features/base/conference'];
+        const { conference } = state["features/base/conference"];
 
         if (conference) {
             const ids = shouldDisplayTileView(state)
-                ? getParticipants(state).map(participant => participant.id)
-                : [ state['features/large-video'].participantId ];
+                ? getParticipants(state).map((participant) => participant.id)
+                : [state["features/large-video"].participantId];
 
             try {
                 conference.selectParticipants(ids);
@@ -40,7 +42,9 @@ export function selectParticipant() {
                 sendAnalytics(createSelectParticipantFailedEvent(err));
 
                 reportError(
-                    err, `Failed to select participants ${ids.toString()}`);
+                    err,
+                    `Failed to select participants ${ids.toString()}`
+                );
             }
         }
     };
@@ -48,7 +52,7 @@ export function selectParticipant() {
 
 /**
  * Action to select the participant to be displayed in LargeVideo based on the
- * participant id provided. If a participant id is not provided, the LargeVideo
+ * participant id provided. If a partcipant id is not provided, the LargeVideo
  * participant will be selected based on a variety of factors: If there is a
  * dominant or pinned speaker, or if there are remote tracks, etc.
  *
@@ -59,13 +63,15 @@ export function selectParticipant() {
 export function selectParticipantInLargeVideo(participant: ?string) {
     return (dispatch: Dispatch<any>, getState: Function) => {
         const state = getState();
-        const participantId = participant ?? _electParticipantInLargeVideo(state);
-        const largeVideo = state['features/large-video'];
-        const screenShares = state['features/video-layout'].screenShares;
+        const participantId =
+            participant ?? _electParticipantInLargeVideo(state);
+        const largeVideo = state["features/large-video"];
+        const screenShares = state["features/video-layout"].screenShares;
         let latestScreenshareParticipantId;
 
         if (screenShares && screenShares.length) {
-            latestScreenshareParticipantId = screenShares[screenShares.length - 1];
+            latestScreenshareParticipantId =
+                screenShares[screenShares.length - 1];
         }
 
         // When trying to auto pin screenshare, always select the endpoint even though it happens to be
@@ -74,10 +80,13 @@ export function selectParticipantInLargeVideo(participant: ?string) {
         // (which updates the large video participant and selects all endpoints because of the auto tile
         // view mode). If the screenshare endpoint is not among the forwarded endpoints from the bridge,
         // it needs to be selected again at this point.
-        if (participantId !== largeVideo.participantId || participantId === latestScreenshareParticipantId) {
+        if (
+            participantId !== largeVideo.participantId ||
+            participantId === latestScreenshareParticipantId
+        ) {
             dispatch({
                 type: SELECT_LARGE_VIDEO_PARTICIPANT,
-                participantId
+                participantId,
             });
 
             dispatch(selectParticipant());
@@ -97,7 +106,7 @@ export function selectParticipantInLargeVideo(participant: ?string) {
 export function updateKnownLargeVideoResolution(resolution: number) {
     return {
         type: UPDATE_KNOWN_LARGE_VIDEO_RESOLUTION,
-        resolution
+        resolution,
     };
 }
 
@@ -131,21 +140,21 @@ function _electLastVisibleRemoteVideo(tracks) {
 function _electParticipantInLargeVideo(state) {
     // 1. If a participant is pinned, they will be shown in the LargeVideo (
     //    regardless of whether they are local or remote).
-    const participants = state['features/base/participants'];
-    let participant = participants.find(p => p.pinned);
+    const participants = state["features/base/participants"];
+    let participant = participants.find((p) => p.pinned);
     let id = participant && participant.id;
 
     if (!id) {
         // 2. No participant is pinned so get the dominant speaker. But the
         //    local participant won't be displayed in LargeVideo even if she is
         //    the dominant speaker.
-        participant = participants.find(p => p.dominantSpeaker && !p.local);
+        participant = participants.find((p) => p.dominantSpeaker && !p.local);
         id = participant && participant.id;
 
         if (!id) {
             // 3. There is no dominant speaker so select the remote participant
             //    who last had visible video.
-            const tracks = state['features/base/tracks'];
+            const tracks = state["features/base/tracks"];
             const videoTrack = _electLastVisibleRemoteVideo(tracks);
 
             id = videoTrack && videoTrack.participantId;

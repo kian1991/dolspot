@@ -170,6 +170,7 @@
             "liveStreaming": "Live Stream"
         },
         "add": "Add",
+        "addEmailNotification": "Please enter your email in the setting!",
         "allow": "Allow",
         "alreadySharedVideoMsg": "Another participant is already sharing a video. This conference allows only one shared video at a time.",
         "alreadySharedVideoTitle": "Only one shared video is allowed at a time",
@@ -286,6 +287,7 @@
         "shareYourScreen": "Share your screen",
         "shareYourScreenDisabled": "Screen sharing disabled.",
         "startLiveStreaming": "Start live stream",
+        "startOrderConfirmation": "Do you want to order a {{language}} interpreter?",
         "startRecording": "Start recording",
         "startRemoteControlErrorMessage": "An error occurred while trying to start the remote control session!",
         "stopLiveStreaming": "Stop live stream",
@@ -496,6 +498,13 @@
         "oldElectronClientDescription1": "You appear to be using an old version of the Jitsi Meet client which has known security vulnerabilities. Please make sure you update to our ",
         "oldElectronClientDescription2": "latest build",
         "oldElectronClientDescription3": " now!"
+    },
+    "order": {
+        "filterlanguages": "Filtered languages",
+        "alllanguages": "All languages",
+        "pleasewait": "Please wait",
+        "pleasewaitTitle": "Looking for an interpreter ...",
+        "pleasewaitDescription": "As soon as we find one, meet them in the video conference room."
     },
     "passwordSetRemotely": "set by another participant",
     "passwordDigitsOnly": "Up to {{number}} digits",
@@ -868,6 +877,7 @@
             "video": "Video"
         },
         "calendar": "Calendar",
+        "order": "Order",
         "connectCalendarButton": "Connect your calendar",
         "connectCalendarText": "Connect your calendar to view all your meetings in {{app}}. Plus, add {{provider}} meetings to your calendar and start them with one click.",
         "enterRoomTitle": "Start a new meeting",
@@ -878,7 +888,7 @@
         "headerSubtitle": "Secure and high quality meetings",
         "info": "Dial-in info",
         "join": "CREATE / JOIN",
-        "jitsiOnMobile": "Jitsi on mobile – download our apps and start a meeting from anywhere",
+        "language": "Language name",
         "moderatedMessage": "Or <a href=\"{{url}}\" rel=\"noopener noreferrer\" target=\"_blank\">book a meeting URL</a> in advance where you are the only moderator.",
         "privacy": "Privacy",
         "recentList": "Recent",
@@ -888,6 +898,7 @@
         "roomNameAllowedChars": "Meeting name should not contain any of these characters: ?, &, :, ', \", %, #.",
         "roomname": "Enter room name",
         "roomnameHint": "Enter the name or URL of the room you want to join. You may make a name up, just let the people you are meeting know it so that they enter the same name.",
+        "searchlanguage": "Search language",
         "sendFeedback": "Send feedback",
         "startMeeting": "Start meeting",
         "terms": "Terms",

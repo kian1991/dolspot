@@ -1,11 +1,8 @@
-import { jitsiLocalStorage } from '@jitsi/js-utils/jitsi-local-storage';
-import EventEmitter from 'events';
+import { jitsiLocalStorage } from "@jitsi/js-utils/jitsi-local-storage";
+import EventEmitter from "events";
 
-import { urlObjectToString } from '../../../react/features/base/util/uri';
-import {
-    PostMessageTransportBackend,
-    Transport
-} from '../../transport';
+import { urlObjectToString } from "../../../react/features/base/util/uri";
+import { PostMessageTransportBackend, Transport } from "../../transport";
 
 import {
     getAvailableDevices,
@@ -15,42 +12,38 @@ import {
     isMultipleAudioInputSupported,
     setAudioInputDevice,
     setAudioOutputDevice,
-    setVideoInputDevice
-} from './functions';
+    setVideoInputDevice,
+} from "./functions";
 
-const ALWAYS_ON_TOP_FILENAMES = [
-    'css/all.css', 'libs/alwaysontop.min.js'
-];
+const ALWAYS_ON_TOP_FILENAMES = ["css/all.css", "libs/alwaysontop.min.js"];
 
 /**
  * Maps the names of the commands expected by the API with the name of the
  * commands expected by jitsi-meet
  */
 const commands = {
-    avatarUrl: 'avatar-url',
-    displayName: 'display-name',
-    e2eeKey: 'e2ee-key',
-    email: 'email',
-    toggleLobby: 'toggle-lobby',
-    hangup: 'video-hangup',
-    muteEveryone: 'mute-everyone',
-    password: 'password',
-    pinParticipant: 'pin-participant',
-    resizeLargeVideo: 'resize-large-video',
-    sendEndpointTextMessage: 'send-endpoint-text-message',
-    sendTones: 'send-tones',
-    setLargeVideoParticipant: 'set-large-video-participant',
-    setVideoQuality: 'set-video-quality',
-    startRecording: 'start-recording',
-    stopRecording: 'stop-recording',
-    subject: 'subject',
-    submitFeedback: 'submit-feedback',
-    toggleAudio: 'toggle-audio',
-    toggleChat: 'toggle-chat',
-    toggleFilmStrip: 'toggle-film-strip',
-    toggleShareScreen: 'toggle-share-screen',
-    toggleTileView: 'toggle-tile-view',
-    toggleVideo: 'toggle-video'
+    avatarUrl: "avatar-url",
+    displayName: "display-name",
+    e2eeKey: "e2ee-key",
+    email: "email",
+    toggleLobby: "toggle-lobby",
+    hangup: "video-hangup",
+    muteEveryone: "mute-everyone",
+    password: "password",
+    sendEndpointTextMessage: "send-endpoint-text-message",
+    sendTones: "send-tones",
+    setLargeVideoParticipant: "set-large-video-participant",
+    setVideoQuality: "set-video-quality",
+    startRecording: "start-recording",
+    stopRecording: "stop-recording",
+    subject: "subject",
+    submitFeedback: "submit-feedback",
+    toggleAudio: "toggle-audio",
+    toggleChat: "toggle-chat",
+    toggleFilmStrip: "toggle-film-strip",
+    toggleShareScreen: "toggle-share-screen",
+    toggleTileView: "toggle-tile-view",
+    toggleVideo: "toggle-video",
 };
 
 /**
@@ -58,38 +51,38 @@ const commands = {
  * events expected by jitsi-meet
  */
 const events = {
-    'avatar-changed': 'avatarChanged',
-    'audio-availability-changed': 'audioAvailabilityChanged',
-    'audio-mute-status-changed': 'audioMuteStatusChanged',
-    'camera-error': 'cameraError',
-    'device-list-changed': 'deviceListChanged',
-    'display-name-change': 'displayNameChange',
-    'email-change': 'emailChange',
-    'endpoint-text-message-received': 'endpointTextMessageReceived',
-    'feedback-submitted': 'feedbackSubmitted',
-    'feedback-prompt-displayed': 'feedbackPromptDisplayed',
-    'filmstrip-display-changed': 'filmstripDisplayChanged',
-    'incoming-message': 'incomingMessage',
-    'log': 'log',
-    'mic-error': 'micError',
-    'outgoing-message': 'outgoingMessage',
-    'participant-joined': 'participantJoined',
-    'participant-kicked-out': 'participantKickedOut',
-    'participant-left': 'participantLeft',
-    'participant-role-changed': 'participantRoleChanged',
-    'password-required': 'passwordRequired',
-    'proxy-connection-event': 'proxyConnectionEvent',
-    'video-ready-to-close': 'readyToClose',
-    'video-conference-joined': 'videoConferenceJoined',
-    'video-conference-left': 'videoConferenceLeft',
-    'video-availability-changed': 'videoAvailabilityChanged',
-    'video-mute-status-changed': 'videoMuteStatusChanged',
-    'video-quality-changed': 'videoQualityChanged',
-    'screen-sharing-status-changed': 'screenSharingStatusChanged',
-    'dominant-speaker-changed': 'dominantSpeakerChanged',
-    'subject-change': 'subjectChange',
-    'suspend-detected': 'suspendDetected',
-    'tile-view-changed': 'tileViewChanged'
+    "avatar-changed": "avatarChanged",
+    "audio-availability-changed": "audioAvailabilityChanged",
+    "audio-mute-status-changed": "audioMuteStatusChanged",
+    "camera-error": "cameraError",
+    "device-list-changed": "deviceListChanged",
+    "display-name-change": "displayNameChange",
+    "email-change": "emailChange",
+    "endpoint-text-message-received": "endpointTextMessageReceived",
+    "feedback-submitted": "feedbackSubmitted",
+    "feedback-prompt-displayed": "feedbackPromptDisplayed",
+    "filmstrip-display-changed": "filmstripDisplayChanged",
+    "incoming-message": "incomingMessage",
+    log: "log",
+    "mic-error": "micError",
+    "outgoing-message": "outgoingMessage",
+    "participant-joined": "participantJoined",
+    "participant-kicked-out": "participantKickedOut",
+    "participant-left": "participantLeft",
+    "participant-role-changed": "participantRoleChanged",
+    "password-required": "passwordRequired",
+    "proxy-connection-event": "proxyConnectionEvent",
+    "video-ready-to-close": "readyToClose",
+    "video-conference-joined": "videoConferenceJoined",
+    "video-conference-left": "videoConferenceLeft",
+    "video-availability-changed": "videoAvailabilityChanged",
+    "video-mute-status-changed": "videoMuteStatusChanged",
+    "video-quality-changed": "videoQualityChanged",
+    "screen-sharing-status-changed": "screenSharingStatusChanged",
+    "dominant-speaker-changed": "dominantSpeakerChanged",
+    "subject-change": "subjectChange",
+    "suspend-detected": "suspendDetected",
+    "tile-view-changed": "tileViewChanged",
 };
 
 /**
@@ -129,7 +122,7 @@ function changeParticipantNumber(APIInstance, number) {
 function generateURL(domain, options = {}) {
     return urlObjectToString({
         ...options,
-        url: `https://${domain}/#jitsi_meet_external_api_id=${id}`
+        url: `https://${domain}/#jitsi_meet_external_api_id=${id}`,
     });
 }
 
@@ -148,37 +141,37 @@ function parseArguments(args) {
     const firstArg = args[0];
 
     switch (typeof firstArg) {
-    case 'string': // old arguments format
-    case undefined: {
-        // Not sure which format but we are trying to parse the old
-        // format because if the new format is used everything will be undefined
-        // anyway.
-        const [
-            roomName,
-            width,
-            height,
-            parentNode,
-            configOverwrite,
-            interfaceConfigOverwrite,
-            jwt,
-            onload
-        ] = args;
+        case "string": // old arguments format
+        case undefined: {
+            // Not sure which format but we are trying to parse the old
+            // format because if the new format is used everything will be undefined
+            // anyway.
+            const [
+                roomName,
+                width,
+                height,
+                parentNode,
+                configOverwrite,
+                interfaceConfigOverwrite,
+                jwt,
+                onload,
+            ] = args;
 
-        return {
-            roomName,
-            width,
-            height,
-            parentNode,
-            configOverwrite,
-            interfaceConfigOverwrite,
-            jwt,
-            onload
-        };
-    }
-    case 'object': // new arguments format
-        return args[0];
-    default:
-        throw new Error('Can\'t parse the arguments!');
+            return {
+                roomName,
+                width,
+                height,
+                parentNode,
+                configOverwrite,
+                interfaceConfigOverwrite,
+                jwt,
+                onload,
+            };
+        }
+        case "object": // new arguments format
+            return args[0];
+        default:
+            throw new Error("Can't parse the arguments!");
     }
 }
 
@@ -200,15 +193,14 @@ function parseSizeParam(value) {
     // invalid values will be ignored and the minimum will be used.
     const re = /([0-9]*\.?[0-9]+)(em|pt|px|%)$/;
 
-    if (typeof value === 'string' && String(value).match(re) !== null) {
+    if (typeof value === "string" && String(value).match(re) !== null) {
         parsedValue = value;
-    } else if (typeof value === 'number') {
+    } else if (typeof value === "number") {
         parsedValue = `${value}px`;
     }
 
     return parsedValue;
 }
-
 
 /**
  * The IFrame API interface class.
@@ -247,9 +239,9 @@ export default class JitsiMeetExternalAPI extends EventEmitter {
     constructor(domain, ...args) {
         super();
         const {
-            roomName = '',
-            width = '100%',
-            height = '100%',
+            roomName = "",
+            width = "100%",
+            height = "100%",
             parentNode = document.body,
             configOverwrite = {},
             interfaceConfigOverwrite = {},
@@ -258,9 +250,11 @@ export default class JitsiMeetExternalAPI extends EventEmitter {
             invitees,
             devices,
             userInfo,
-            e2eeKey
+            e2eeKey,
         } = parseArguments(args);
-        const localStorageContent = jitsiLocalStorage.getItem('jitsiLocalStorage');
+        const localStorageContent = jitsiLocalStorage.getItem(
+            "jitsiLocalStorage"
+        );
 
         this._parentNode = parentNode;
         this._url = generateURL(domain, {
@@ -271,8 +265,8 @@ export default class JitsiMeetExternalAPI extends EventEmitter {
             devices,
             userInfo,
             appData: {
-                localStorageContent
-            }
+                localStorageContent,
+            },
         });
         this._createIFrame(height, width, onload);
         this._transport = new Transport({
@@ -280,9 +274,9 @@ export default class JitsiMeetExternalAPI extends EventEmitter {
                 postisOptions: {
                     allowedOrigin: new URL(this._url).origin,
                     scope: `jitsi_meet_external_api_${id}`,
-                    window: this._frame.contentWindow
-                }
-            })
+                    window: this._frame.contentWindow,
+                },
+            }),
         });
         if (Array.isArray(invitees) && invitees.length > 0) {
             this.invite(invitees);
@@ -313,13 +307,13 @@ export default class JitsiMeetExternalAPI extends EventEmitter {
     _createIFrame(height, width, onload) {
         const frameName = `jitsiConferenceFrame${id}`;
 
-        this._frame = document.createElement('iframe');
-        this._frame.allow = 'camera; microphone; display-capture';
+        this._frame = document.createElement("iframe");
+        this._frame.allow = "camera; microphone; display-capture";
         this._frame.src = this._url;
         this._frame.name = frameName;
         this._frame.id = frameName;
         this._setSize(height, width);
-        this._frame.setAttribute('allowFullScreen', 'true');
+        this._frame.setAttribute("allowFullScreen", "true");
         this._frame.style.border = 0;
 
         if (onload) {
@@ -339,8 +333,8 @@ export default class JitsiMeetExternalAPI extends EventEmitter {
     _getAlwaysOnTopResources() {
         const iframeWindow = this._frame.contentWindow;
         const iframeDocument = iframeWindow.document;
-        let baseURL = '';
-        const base = iframeDocument.querySelector('base');
+        let baseURL = "";
+        const base = iframeDocument.querySelector("base");
 
         if (base && base.href) {
             baseURL = base.href;
@@ -351,7 +345,7 @@ export default class JitsiMeetExternalAPI extends EventEmitter {
         }
 
         return ALWAYS_ON_TOP_FILENAMES.map(
-            filename => (new URL(filename, baseURL)).href
+            (filename) => new URL(filename, baseURL).href
         );
     }
 
@@ -362,8 +356,8 @@ export default class JitsiMeetExternalAPI extends EventEmitter {
      * @returns {string} The formatted display name.
      */
     _getFormattedDisplayName(participantId) {
-        const { formattedDisplayName }
-            = this._participants[participantId] || {};
+        const { formattedDisplayName } =
+            this._participants[participantId] || {};
 
         return formattedDisplayName;
     }
@@ -377,7 +371,6 @@ export default class JitsiMeetExternalAPI extends EventEmitter {
         return this._onStageParticipant;
     }
 
-
     /**
      * Getter for the large video element in Jitsi Meet.
      *
@@ -386,14 +379,16 @@ export default class JitsiMeetExternalAPI extends EventEmitter {
     _getLargeVideo() {
         const iframe = this.getIFrame();
 
-        if (!this._isLargeVideoVisible
-                || !iframe
-                || !iframe.contentWindow
-                || !iframe.contentWindow.document) {
+        if (
+            !this._isLargeVideoVisible ||
+            !iframe ||
+            !iframe.contentWindow ||
+            !iframe.contentWindow.document
+        ) {
             return;
         }
 
-        return iframe.contentWindow.document.getElementById('largeVideo');
+        return iframe.contentWindow.document.getElementById("largeVideo");
     }
 
     /**
@@ -407,17 +402,26 @@ export default class JitsiMeetExternalAPI extends EventEmitter {
     _getParticipantVideo(participantId) {
         const iframe = this.getIFrame();
 
-        if (!iframe
-                || !iframe.contentWindow
-                || !iframe.contentWindow.document) {
+        if (
+            !iframe ||
+            !iframe.contentWindow ||
+            !iframe.contentWindow.document
+        ) {
             return;
         }
 
-        if (typeof participantId === 'undefined' || participantId === this._myUserID) {
-            return iframe.contentWindow.document.getElementById('localVideo_container');
+        if (
+            typeof participantId === "undefined" ||
+            participantId === this._myUserID
+        ) {
+            return iframe.contentWindow.document.getElementById(
+                "localVideo_container"
+            );
         }
 
-        return iframe.contentWindow.document.querySelector(`#participant_${participantId} video`);
+        return iframe.contentWindow.document.querySelector(
+            `#participant_${participantId} video`
+        );
     }
 
     /**
@@ -434,12 +438,10 @@ export default class JitsiMeetExternalAPI extends EventEmitter {
         const parsedWidth = parseSizeParam(width);
 
         if (parsedHeight !== undefined) {
-            this._height = height;
             this._frame.style.height = parsedHeight;
         }
 
         if (parsedWidth !== undefined) {
-            this._width = width;
             this._frame.style.width = parsedWidth;
         }
     }
@@ -452,80 +454,84 @@ export default class JitsiMeetExternalAPI extends EventEmitter {
      * @private
      */
     _setupListeners() {
-        this._transport.on('event', ({ name, ...data }) => {
+        this._transport.on("event", ({ name, ...data }) => {
             const userID = data.id;
 
             switch (name) {
-            case 'video-conference-joined': {
-                if (typeof this._tmpE2EEKey !== 'undefined') {
-                    this.executeCommand(commands.e2eeKey, this._tmpE2EEKey);
-                    this._tmpE2EEKey = undefined;
+                case "video-conference-joined": {
+                    if (typeof this._tmpE2EEKey !== "undefined") {
+                        this.executeCommand(commands.e2eeKey, this._tmpE2EEKey);
+                        this._tmpE2EEKey = undefined;
+                    }
+
+                    this._myUserID = userID;
+                    this._participants[userID] = {
+                        avatarURL: data.avatarURL,
+                    };
                 }
 
-                this._myUserID = userID;
-                this._participants[userID] = {
-                    avatarURL: data.avatarURL
-                };
-            }
-
-            // eslint-disable-next-line no-fallthrough
-            case 'participant-joined': {
-                this._participants[userID] = this._participants[userID] || {};
-                this._participants[userID].displayName = data.displayName;
-                this._participants[userID].formattedDisplayName
-                    = data.formattedDisplayName;
-                changeParticipantNumber(this, 1);
-                break;
-            }
-            case 'participant-left':
-                changeParticipantNumber(this, -1);
-                delete this._participants[userID];
-                break;
-            case 'display-name-change': {
-                const user = this._participants[userID];
-
-                if (user) {
-                    user.displayName = data.displayname;
-                    user.formattedDisplayName = data.formattedDisplayName;
+                // eslint-disable-next-line no-fallthrough
+                case "participant-joined": {
+                    this._participants[userID] =
+                        this._participants[userID] || {};
+                    this._participants[userID].displayName = data.displayName;
+                    this._participants[userID].formattedDisplayName =
+                        data.formattedDisplayName;
+                    changeParticipantNumber(this, 1);
+                    break;
                 }
-                break;
-            }
-            case 'email-change': {
-                const user = this._participants[userID];
+                case "participant-left":
+                    changeParticipantNumber(this, -1);
+                    delete this._participants[userID];
+                    break;
+                case "display-name-change": {
+                    const user = this._participants[userID];
 
-                if (user) {
-                    user.email = data.email;
+                    if (user) {
+                        user.displayName = data.displayname;
+                        user.formattedDisplayName = data.formattedDisplayName;
+                    }
+                    break;
                 }
-                break;
-            }
-            case 'avatar-changed': {
-                const user = this._participants[userID];
+                case "email-change": {
+                    const user = this._participants[userID];
 
-                if (user) {
-                    user.avatarURL = data.avatarURL;
+                    if (user) {
+                        user.email = data.email;
+                    }
+                    break;
                 }
-                break;
-            }
-            case 'on-stage-participant-changed':
-                this._onStageParticipant = userID;
-                this.emit('largeVideoChanged');
-                break;
-            case 'large-video-visibility-changed':
-                this._isLargeVideoVisible = data.isVisible;
-                this.emit('largeVideoChanged');
-                break;
-            case 'video-conference-left':
-                changeParticipantNumber(this, -1);
-                delete this._participants[this._myUserID];
-                break;
-            case 'video-quality-changed':
-                this._videoQuality = data.videoQuality;
-                break;
-            case 'local-storage-changed':
-                jitsiLocalStorage.setItem('jitsiLocalStorage', data.localStorageContent);
+                case "avatar-changed": {
+                    const user = this._participants[userID];
 
-                // Since this is internal event we don't need to emit it to the consumer of the API.
-                return true;
+                    if (user) {
+                        user.avatarURL = data.avatarURL;
+                    }
+                    break;
+                }
+                case "on-stage-participant-changed":
+                    this._onStageParticipant = userID;
+                    this.emit("largeVideoChanged");
+                    break;
+                case "large-video-visibility-changed":
+                    this._isLargeVideoVisible = data.isVisible;
+                    this.emit("largeVideoChanged");
+                    break;
+                case "video-conference-left":
+                    changeParticipantNumber(this, -1);
+                    delete this._participants[this._myUserID];
+                    break;
+                case "video-quality-changed":
+                    this._videoQuality = data.videoQuality;
+                    break;
+                case "local-storage-changed":
+                    jitsiLocalStorage.setItem(
+                        "jitsiLocalStorage",
+                        data.localStorageContent
+                    );
+
+                    // Since this is internal event we don't need to emit it to the consumer of the API.
+                    return true;
             }
 
             const eventName = events[name];
@@ -632,21 +638,10 @@ export default class JitsiMeetExternalAPI extends EventEmitter {
      * NOTE: This method is not removed for backward comatability purposes.
      */
     addEventListeners(listeners) {
-        for (const event in listeners) { // eslint-disable-line guard-for-in
+        for (const event in listeners) {
+            // eslint-disable-line guard-for-in
             this.addEventListener(event, listeners[event]);
         }
-    }
-
-    /**
-     * Captures the screenshot of the large video.
-     *
-     * @returns {Promise<string>} - Resolves with a base64 encoded image data of the screenshot
-     * if large video is detected, an error otherwise.
-     */
-    captureLargeVideoScreenshot() {
-        return this._transport.sendRequest({
-            name: 'capture-largevideo-screenshot'
-        });
     }
 
     /**
@@ -655,7 +650,7 @@ export default class JitsiMeetExternalAPI extends EventEmitter {
      * @returns {void}
      */
     dispose() {
-        this.emit('_willDispose');
+        this.emit("_willDispose");
         this._transport.dispose();
         this.removeAllListeners();
         if (this._frame && this._frame.parentNode) {
@@ -682,13 +677,13 @@ export default class JitsiMeetExternalAPI extends EventEmitter {
      */
     executeCommand(name, ...args) {
         if (!(name in commands)) {
-            console.error('Not supported command name.');
+            console.error("Not supported command name.");
 
             return;
         }
         this._transport.sendEvent({
             data: args,
-            name: commands[name]
+            name: commands[name],
         });
     }
 
@@ -708,7 +703,8 @@ export default class JitsiMeetExternalAPI extends EventEmitter {
      * @returns {void}
      */
     executeCommands(commandList) {
-        for (const key in commandList) { // eslint-disable-line guard-for-in
+        for (const key in commandList) {
+            // eslint-disable-line guard-for-in
             this.executeCommand(key, commandList[key]);
         }
     }
@@ -765,7 +761,7 @@ export default class JitsiMeetExternalAPI extends EventEmitter {
      */
     isAudioAvailable() {
         return this._transport.sendRequest({
-            name: 'is-audio-available'
+            name: "is-audio-available",
         });
     }
 
@@ -809,12 +805,12 @@ export default class JitsiMeetExternalAPI extends EventEmitter {
      */
     invite(invitees) {
         if (!Array.isArray(invitees) || invitees.length === 0) {
-            return Promise.reject(new TypeError('Invalid Argument'));
+            return Promise.reject(new TypeError("Invalid Argument"));
         }
 
         return this._transport.sendRequest({
-            name: 'invite',
-            invitees
+            name: "invite",
+            invitees,
         });
     }
 
@@ -826,7 +822,7 @@ export default class JitsiMeetExternalAPI extends EventEmitter {
      */
     isAudioMuted() {
         return this._transport.sendRequest({
-            name: 'is-audio-muted'
+            name: "is-audio-muted",
         });
     }
 
@@ -837,7 +833,7 @@ export default class JitsiMeetExternalAPI extends EventEmitter {
      */
     isSharingScreen() {
         return this._transport.sendRequest({
-            name: 'is-sharing-screen'
+            name: "is-sharing-screen",
         });
     }
 
@@ -904,7 +900,7 @@ export default class JitsiMeetExternalAPI extends EventEmitter {
      */
     isVideoAvailable() {
         return this._transport.sendRequest({
-            name: 'is-video-available'
+            name: "is-video-available",
         });
     }
 
@@ -916,7 +912,7 @@ export default class JitsiMeetExternalAPI extends EventEmitter {
      */
     isVideoMuted() {
         return this._transport.sendRequest({
-            name: 'is-video-muted'
+            name: "is-video-muted",
         });
     }
 
@@ -928,7 +924,7 @@ export default class JitsiMeetExternalAPI extends EventEmitter {
      * @returns {void}
      */
     pinParticipant(participantId) {
-        this.executeCommand('pinParticipant', participantId);
+        this.executeCommand("pinParticipant", participantId);
     }
 
     /**
@@ -954,20 +950,7 @@ export default class JitsiMeetExternalAPI extends EventEmitter {
      * NOTE: This method is not removed for backward comatability purposes.
      */
     removeEventListeners(eventList) {
-        eventList.forEach(event => this.removeEventListener(event));
-    }
-
-    /**
-     * Resizes the large video container as per the dimensions provided.
-     *
-     * @param {number} width - Width that needs to be applied on the large video container.
-     * @param {number} height - Height that needs to be applied on the large video container.
-     * @returns {void}
-     */
-    resizeLargeVideo(width, height) {
-        if (width <= this._width && height <= this._height) {
-            this.executeCommand('resizeLargeVideo', width, height);
-        }
+        eventList.forEach((event) => this.removeEventListener(event));
     }
 
     /**
@@ -984,8 +967,8 @@ export default class JitsiMeetExternalAPI extends EventEmitter {
      */
     sendProxyConnectionEvent(event) {
         this._transport.sendEvent({
-            data: [ event ],
-            name: 'proxy-connection-event'
+            data: [event],
+            name: "proxy-connection-event",
         });
     }
 
@@ -1022,7 +1005,7 @@ export default class JitsiMeetExternalAPI extends EventEmitter {
      * @returns {void}
      */
     setLargeVideoParticipant(participantId) {
-        this.executeCommand('setLargeVideoParticipant', participantId);
+        this.executeCommand("setLargeVideoParticipant", participantId);
     }
 
     /**
@@ -1057,7 +1040,7 @@ export default class JitsiMeetExternalAPI extends EventEmitter {
      * @returns {void}
      */
     startRecording(options) {
-        this.executeCommand('startRecording', options);
+        this.executeCommand("startRecording", options);
     }
 
     /**
@@ -1067,6 +1050,6 @@ export default class JitsiMeetExternalAPI extends EventEmitter {
      * @returns {void}
      */
     stopRecording(mode) {
-        this.executeCommand('startRecording', mode);
+        this.executeCommand("startRecording", mode);
     }
 }

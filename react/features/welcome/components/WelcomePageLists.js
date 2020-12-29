@@ -3,10 +3,11 @@
 import React, { Component } from 'react';
 
 import { translate } from '../../base/i18n';
-import { IconEventNote, IconRestore } from '../../base/icons';
+import { IconEventNote, IconRestore, IconOrder } from '../../base/icons';
 import { PagedList } from '../../base/react';
 import { connect } from '../../base/redux';
 import { CalendarList, isCalendarEnabled } from '../../calendar-sync';
+import { LanguageList } from '../../order';
 import { RecentList } from '../../recent-list';
 import { setWelcomePageListsDefaultPage } from '../actions';
 
@@ -74,6 +75,12 @@ class WelcomePageLists extends Component<Props> {
                 component: RecentList,
                 icon: IconRestore,
                 title: t('welcomepage.recentList')
+            },
+            // Add the orde button
+            {
+                component: LanguageList,
+                icon: IconOrder,
+                title: t('welcomepage.order')
             }
         ];
 
@@ -127,7 +134,7 @@ function _mapStateToProps(state: Object) {
     if (typeof defaultPage === 'undefined') {
         const recentList = state['features/recent-list'];
 
-        defaultPage = recentList && recentList.length ? 0 : 1;
+        defaultPage = recentList && recentList.length ? 0 : 2;
     }
 
     return {

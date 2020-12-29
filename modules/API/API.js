@@ -21,11 +21,7 @@ import {
 import { isEnabled as isDropboxEnabled } from '../../react/features/dropbox';
 import { toggleE2EE } from '../../react/features/e2ee/actions';
 import { invite } from '../../react/features/invite';
-import {
-    captureLargeVideoScreenshot,
-    resizeLargeVideo,
-    selectParticipantInLargeVideo
-} from '../../react/features/large-video/actions';
+import { selectParticipantInLargeVideo } from '../../react/features/large-video/actions';
 import { toggleLobbyMode } from '../../react/features/lobby/actions.web';
 import { RECORDING_TYPES } from '../../react/features/recording/constants';
 import { getActiveSession } from '../../react/features/recording/functions';
@@ -119,11 +115,6 @@ function initCommands() {
         },
         'proxy-connection-event': event => {
             APP.conference.onProxyConnectionEvent(event);
-        },
-        'resize-large-video': (width, height) => {
-            logger.debug('Resize large video command received');
-            sendAnalytics(createApiEvent('largevideo.resized'));
-            APP.store.dispatch(resizeLargeVideo(width, height));
         },
         'send-tones': (options = {}) => {
             const { duration, tones, pause } = options;
@@ -351,21 +342,6 @@ function initCommands() {
         const { name } = request;
 
         switch (name) {
-        case 'capture-largevideo-screenshot' :
-            APP.store.dispatch(captureLargeVideoScreenshot())
-                .then(dataURL => {
-                    let error;
-
-                    if (!dataURL) {
-                        error = new Error('No large video found!');
-                    }
-
-                    callback({
-                        error,
-                        dataURL
-                    });
-                });
-            break;
         case 'invite': {
             const { invitees } = request;
 
