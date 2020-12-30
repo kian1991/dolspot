@@ -182,8 +182,14 @@ $welcomePageHeaderBackgroundPosition: center;
 $welcomePageHeaderBackgroundRepeat: none;
 $welcomePageHeaderBackgroundSize: cover;
 $welcomePageHeaderPaddingBottom: 0px;
+$welcomePageHeaderMinHeight: fit-content;
 $welcomePageHeaderTitleMaxWidth: initial;
 $welcomePageHeaderTextAlign: center;
+
+$welcomePageHeaderTextMarginTop: 35px;
+$welcomePageHeaderTextMarginBottom: 35px;
+$welcomePageHeaderTextDisplay: flex;
+$welcomePageHeaderTextWidth: 650px;
 
 $welcomePageHeaderContainerDisplay: flex;
 $welcomePageHeaderContainerMargin: 104px 32px 0 32px;
@@ -205,6 +211,14 @@ $welcomePageEnterRoomDisplay: flex;
 $welcomePageEnterRoomWidth: calc(100% - 32px);
 $welcomePageEnterRoomPadding: 4px;
 $welcomePageEnterRoomMargin: 0 auto;
+$welcomePageEnterRoomBorderRadius: 0px;
+
+$welcomePageEnterRoomInputContainerPadding: 0 8px 5px 0px;
+$welcomePageEnterRoomInputContainerBorderWidth: 0px 0px 2px 0px;
+$welcomePageEnterRoomInputContainerBorderStyle: solid;
+$welcomePageEnterRoomInputContainerBorderImage: linear-gradient(to right, #dee1e6, #fff) 1;
+
+$welcomePageEnterRoomTitleDisplay: inherit;
 
 $welcomePageTabContainerDisplay: none;
 $welcomePageTabContentDisplay: inherit;
