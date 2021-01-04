@@ -19,8 +19,8 @@ export const ColorPalette = {
      */
     black: BLACK,
     blackBlue: 'rgb(0, 3, 6)',
-    blue: '#17A0DB',
-    blueHighlight: '#1081b2',
+    blue: '#148476',
+    blueHighlight: '#097462',
     buttonUnderlay: '#495258',
     darkGrey: '#555555',
     green: '#40b183',
@@ -40,5 +40,5 @@ export const ColorPalette = {
     G400: '#00875A', // Slime
     N500: '#42526E', // McFanning
     R400: '#DE350B', // Red dirt
-    Y200: '#FFC400' // Pub mix
+    Y200: '#FFC400', // Pub mix
 };

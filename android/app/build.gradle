@@ -40,6 +40,12 @@ android {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
         }
+        release {
+            storeFile file('natgo.keystore')
+            storePassword ''
+            keyAlias 'natgo_development'
+            keyPassword ''
+        }
     }
 
     buildTypes {
