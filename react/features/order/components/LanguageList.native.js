@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import { Text, View, TextInput } from 'react-native';
+import { Text, View, TextInput, ActivityIndicator } from 'react-native';
 import type { Dispatch } from 'redux';
 
 import { getDefaultURL } from '../../app/functions';
@@ -51,7 +51,12 @@ type Props = {
     /**
      * The Local participant object.
      */
-    _localParticipant: Object
+    _localParticipant: Object,
+
+    /**
+     * The languages array for the orders.
+     */
+    _languages: Array<Section>
 };
 
 /**
@@ -83,43 +88,14 @@ class LanguageList extends AbstractPage<Props> {
      * @inheritdoc
      */
     render() {
-        const { t } = this.props;
-        const languages = [
-            'Albanisch',
-            'Amharisch',
-            'Arabisch',
-            'Aramäisch',
-            'Armenisch',
-            'Aserbaidschanisch',
-            'Kurdisch - Bahdini',
-            'Dari',
-            'Englisch',
-            'Farsi',
-            'Französisch',
-            'Georgisch',
-            'Hindi',
-            'Italienisch ',
-            'Kurdisch - Kurmanci',
-            'Oromo',
-            'Pashto',
-            'Polnisch',
-            'Punjabi',
-            'Rumänisch',
-            'Russisch',
-            'Somali',
-            'Kurdisch - Sorani',
-            'Support',
-            'Swahili',
-            'Tigrinya',
-            'Turkisch',
-            'Urdu',
-            'Vietnamesisch',
-            'Kurdisch - Zazaki'
-        ];
+        const { t, _languages } = this.props;
+        const { language } = this.state;
 
-        const languageList = toDisplayableList(languages, t, this.state.language);
-
-        console.log('render language list ', languageList);
+        console.log(' _languages => ', _languages);
+        const languageList = _languages !== null
+            && _languages.length > 0
+            ? toDisplayableList(_languages, t, language)
+            : [];
 
         return (
             <View style = { styles.container }>
@@ -140,13 +116,15 @@ class LanguageList extends AbstractPage<Props> {
                         underlineColorAndroid = 'transparent'
                         value = { this.state.language } />
                 </View>
-                <NavigateSectionList
-                    disabled = { false }
-                    onPress = { this._onPress }
-                    renderListEmptyComponent
-                        = { this._getRenderListEmptyComponent() }
-                    sections = { languageList }
-                    style = { styles.container } />
+                { _languages === null ? <ActivityIndicator />
+                    : <NavigateSectionList
+                        disabled = { false }
+                        onPress = { this._onPress }
+                        renderListEmptyComponent
+                            = { this._getRenderListEmptyComponent() }
+                        sections = { languageList }
+                        style = { styles.container } />
+                }
             </View>
         );
     }
@@ -205,7 +183,6 @@ class LanguageList extends AbstractPage<Props> {
      * @inheritdoc
      */
     _onLanguageFilter(val) {
-        console.log(val);
         this.setState({
             language: val
         });
@@ -225,7 +202,8 @@ export function _mapStateToProps(state: Object) {
     return {
         _defaultServerURL: getDefaultURL(state),
         _localParticipant: getLocalParticipant(state),
-        _recentList: state['features/recent-list']
+        _recentList: state['features/recent-list'],
+        _languages: state['features/order'].languages
     };
 }
 

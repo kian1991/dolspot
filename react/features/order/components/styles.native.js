@@ -6,17 +6,17 @@ import { createStyleSheet } from '../../base/styles';
  */
 export default createStyleSheet({
     container: {
-      flex: 1
+        flex: 1
     },
     loadingContainer: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: '#F5FCFF'
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#F5FCFF'
     },
     loadingText: {
         fontSize: 20,
         textAlign: 'center',
         margin: 10
     }
-  });
+});

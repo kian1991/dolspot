@@ -25,7 +25,6 @@ function toDisplayableItem(item) {
  * @private
  * @param {Array<Object>} recentList - The recent list form the redux store.
  * @param {Function} t - The translate function.
- * @param {string} defaultServerURL - The default server URL.
  * @param {string} searchString - The search filter string.
  * @returns {Array<Object>}
  */
@@ -35,12 +34,14 @@ export function toDisplayableList(recentList, t, searchString) {
     const allSection
         = createSection(t('order.alllanguages'), 'All');
     const filter = searchString === '' ? 0 : 1;
+
     for (const item of recentList) {
         const displayableItem = toDisplayableItem(item);
-        if (filter && item.toLowerCase().match(RegExp(searchString.toLowerCase(),'gm')) !== null) {
-            filterSection.data.push(displayableItem);         
-        } else if(!filter) {
-            allSection.data.push(displayableItem);         
+
+        if (filter && item.toLowerCase().match(RegExp(searchString.toLowerCase(), 'gm')) !== null) {
+            filterSection.data.push(displayableItem);
+        } else if (!filter) {
+            allSection.data.push(displayableItem);
         }
     }
     const displayableList = [];

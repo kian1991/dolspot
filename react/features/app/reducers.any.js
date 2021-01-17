@@ -40,6 +40,7 @@ import '../invite/reducer';
 import '../large-video/reducer';
 import '../lobby/reducer';
 import '../notifications/reducer';
+import '../order/reducer';
 import '../overlay/reducer';
 import '../recent-list/reducer';
 import '../recording/reducer';
