@@ -1,25 +1,23 @@
 // @flow
 /* global $ */
 
-import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import React, { Component } from "react";
+import { View, Text } from "react-native";
 
-import { appNavigate } from '../../app/actions';
-import { ConfirmDialog, hideDialog, AlertDialog } from '../../base/dialog';
-import { translate } from '../../base/i18n';
-import { LoadingIndicator } from '../../base/react';
-import { connect } from '../../base/redux';
-import { ColorPalette } from '../../base/styles';
+import { appNavigate } from "../../app/actions";
+import { ConfirmDialog, hideDialog, AlertDialog } from "../../base/dialog";
+import { translate } from "../../base/i18n";
+import { LoadingIndicator } from "../../base/react";
+import { connect } from "../../base/redux";
+import { ColorPalette } from "../../base/styles";
 
-import styles from './styles';
-
+import styles from "./styles";
 
 /**
  * The type of the React {@code Component} props of
  * {@link OrderDialog}.
  */
 export type Props = {
-
     /**
      * The language for the new conference.
      */
@@ -38,20 +36,20 @@ export type Props = {
     /**
      * The redux dispatch function.
      */
-    dispatch: Function
+    dispatch: Function,
 };
 
 const getRandomColor = () => {
     const colors = [
-        'Blau',
-        'Grün',
-        'Pink',
-        'Violett',
-        'Weiß',
-        'Braun',
-        'Lila',
-        'Rot',
-        'Gelb'
+        "Blau",
+        "Grün",
+        "Pink",
+        "Violett",
+        "Weiß",
+        "Braun",
+        "Lila",
+        "Rot",
+        "Gelb",
     ];
 
     return colors[Math.floor(Math.random() * colors.length)];
@@ -72,7 +70,7 @@ class OrderDialog extends Component<Props> {
         super(props);
 
         this.state = {
-            loading: false
+            loading: false,
         };
 
         // Bind event handler so it is only bound once for every instance.
@@ -86,33 +84,32 @@ class OrderDialog extends Component<Props> {
      */
     render() {
         const { t, _language, _localParticipant } = this.props;
-        const alert
-            = _localParticipant.email === ''
-            || _localParticipant.email === undefined;
+        const alert =
+            _localParticipant.email === "" ||
+            _localParticipant.email === undefined;
 
-        return alert
-            ? <AlertDialog contentKey = { t('dialog.addEmailNotification') } />
-            : this.state.loading ? (
-                <View style = { styles.loadingContainer }>
-                    <LoadingIndicator
-                        color = { ColorPalette.black }
-                        size = 'small' />
-                    <Text style = { styles.loadingText }>{t('order.pleasewait')}</Text>
-                    <Text style = { styles.loadingText }>
-                        {t('order.pleasewaitTitle')}
-                    </Text>
-                    <Text style = { styles.loadingText }>
-                        {t('order.pleasewaitDescription')}
-                    </Text>
-                </View>
-            ) : (
-                <ConfirmDialog
-                    contentKey = { t('dialog.startOrderConfirmation', {
-                        language: _language
-                    }) }
-                    okKey = { 'dialog.Yes' }
-                    onSubmit = { this._onSubmit } />
-            );
+        return alert ? (
+            <AlertDialog contentKey={t("dialog.addEmailNotification")} />
+        ) : this.state.loading ? (
+            <View style={styles.loadingContainer}>
+                <LoadingIndicator color={ColorPalette.black} size="small" />
+                <Text style={styles.loadingText}>{t("order.pleasewait")}</Text>
+                <Text style={styles.loadingText}>
+                    {t("order.pleasewaitTitle")}
+                </Text>
+                <Text style={styles.loadingText}>
+                    {t("order.pleasewaitDescription")}
+                </Text>
+            </View>
+        ) : (
+            <ConfirmDialog
+                contentKey={t("dialog.startOrderConfirmation", {
+                    language: _language,
+                })}
+                okKey={"dialog.Yes"}
+                onSubmit={this._onSubmit}
+            />
+        );
     }
 
     _onSubmit: () => boolean;
@@ -125,14 +122,14 @@ class OrderDialog extends Component<Props> {
      */
     _onSubmit() {
         this.setState({
-            loading: true
+            loading: true,
         });
 
         const { _localParticipant, _language } = this.props;
 
         if (
-            _localParticipant.email === ''
-            || _localParticipant.email === undefined
+            _localParticipant.email === "" ||
+            _localParticipant.email === undefined
         ) {
             return true;
         }
@@ -142,23 +139,22 @@ class OrderDialog extends Component<Props> {
             _time = `${x.getHours()}:${x.getMinutes()}:${x.getSeconds()}`;
 
         // _reference = `${_language} - ${_date} ${_time}`;
-        const _reference = `${_language}_imRaum_${getRandomColor()}${x.getSeconds()}${x.getMinutes()}`;
+        const _reference = `${_language}ImRaum${getRandomColor()}${x.getSeconds()}${x.getMinutes()}`;
 
         // Submit the post request to get the meeting name.
         const data = JSON.stringify({
             email: _localParticipant.email,
             name: _localParticipant.name,
-            languages: [ _language ],
-            address: 'Online',
+            languages: [_language],
+            address: "Online",
             date: _date,
             time: _time,
             reference: _reference,
-            notes: 'videoanruf',
-            customer: '/',
-            phone: '',
-            isDirectCall: true
+            notes: "videoanruf",
+            customer: "/",
+            phone: "",
+            isDirectCall: true,
         });
-
 
         // console.log('body =>', data);
         $.ajax({
@@ -166,8 +162,8 @@ class OrderDialog extends Component<Props> {
             // url: 'https://script.google.com/macros/s/AKfycbzU_4_ctXyPf7U-6S3Aq165DR4bDqoOUHxoNUVdykJbUwUSr-c/exec',
             // For production, Use only Support language.
             url:
-                'https://script.google.com/macros/s/AKfycbyzvb3gFDWIrNw3zSWlYdXpMzqxzHqx14v70GrvcZM5vuci7Dg/exec',
-            type: 'POST',
+                "https://script.google.com/macros/s/AKfycbyzvb3gFDWIrNw3zSWlYdXpMzqxzHqx14v70GrvcZM5vuci7Dg/exec",
+            type: "POST",
             data,
             success() {
                 /* / console.log('result =>', res);
@@ -187,13 +183,13 @@ class OrderDialog extends Component<Props> {
                     loading: false,
                 });
                 _t.props.dispatch(hideDialog());*/
-            }
+            },
         });
 
         // Switch to room immediately (not waiting for ajax call to be finished)
         this.props.dispatch(appNavigate(_reference));
         this.setState({
-            loading: false
+            loading: false,
         });
         this.props.dispatch(hideDialog());
     }
