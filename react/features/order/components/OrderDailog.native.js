@@ -127,7 +127,7 @@ class OrderDialog extends Component<Props> {
             _date = `${x.getDate()}.${x.getMonth() + 1}.${x.getFullYear()}`,
             _time = `${x.getHours()}:${x.getMinutes()}:${x.getSeconds()}`,
             //_reference = `${_language} - ${_date} ${_time}`;
-            _reference = `${_language}_imRaum_${getRandomColor()}${x.getSeconds()}${x.getMinutes()}`;
+            _reference = `${_language}ImRaum${getRandomColor()}${x.getSeconds()}${x.getMinutes()}`;
         // Submit the post request to get the meeting name.
         const data = JSON.stringify({
             email: _localParticipant.email,
